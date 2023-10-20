@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.gymtracker.main.MainActivity">
+    <item android:title="Inicio" />
+    <item android:title="Records" />
+    <item android:title="Entrenamiento" />
+    <item android:title="Rutinas" />
+</menu>
