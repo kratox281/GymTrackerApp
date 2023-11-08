@@ -10,9 +10,18 @@ import com.example.gymtracker.databinding.ActivityRecordsBinding;
 import com.example.gymtracker.entrenamiento.Entrenamiento;
 import com.example.gymtracker.main.MainActivity;
 import com.example.gymtracker.rutinas.*;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 
@@ -20,6 +29,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.*;
 
@@ -58,15 +69,37 @@ public class Records extends AppCompatActivity {
         records =new ArrayList<>();
         adr = new RecordArrayAdapter(getApplicationContext(),R.layout.listviewrecords,records);
         listarecords.setAdapter(adr);
-
+        llenar();
         btRegistrar.setOnClickListener(view -> {
-            adr.add(new Record(etNombreEjer.getText().toString(),Double.parseDouble( etPesoEjer.getText().toString())));
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
             Toast.makeText(this, "Record Registrado", Toast.LENGTH_SHORT).show();
+
+            db.collection("Records")
+                    .add(new Record(etNombreEjer.getText().toString(),Double.parseDouble( etPesoEjer.getText().toString())))
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Log.d("BDD", "DocumentSnapshot added with ID: " + documentReference.getId());
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w("BDD", "Error adding document", e);
+                        }
+                    });
+            adr.clear();
+            llenar();
         });
         listarecords.setOnItemClickListener((parent, view, position, id) -> {
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
             Record rec = adr.getItem(position);
+            db.collection("Records").document(rec.getReferencia()).delete();
             Toast.makeText(this, "Se ha eliminado el record de "+rec.getEjercicio(), Toast.LENGTH_SHORT).show();
-            adr.remove(adr.getItem(position));        });
+            adr.remove(adr.getItem(position));
+
+
+        });
     }
 
     @Override
@@ -119,4 +152,53 @@ public class Records extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     //HASTA AQUI
+
+   //Proxima actualizacion
+    private void  existe(String nombre){
+        Log.e("MetodoEXISTE", "nombre: "+nombre );
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Records")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Record record = new Record((String) document.get("ejercicio"), (Double) document.get("peso"));
+                                Log.e("CONSULTA", "Referencia: "+document.getId()+" ejer"+document.get("ejercicio"));
+                                record.setReferencia(document.getId());
+                                if (record.getEjercicio().equalsIgnoreCase(nombre)){
+                                    Log.e("MetodoEXISTE", "coincide el nombre" );
+                                    db.collection("Records").document(record.getReferencia()).delete();
+                                }
+                            }
+                        } else {
+                            Log.w("BDD", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+
+    }
+    private void llenar(){
+         ArrayList<Record>records = new ArrayList<>();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Records")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Record r = new Record((String) document.get("ejercicio"), (Double) document.get("peso"));
+                                Log.e("CONSULTA", "Referencia: "+document.getId()+" ejer"+document.get("ejercicio"));
+                                r.setReferencia(document.getId());
+                                adr.add(r);
+                            }
+                        } else {
+                            Log.w("BDD", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+
+    }
 }

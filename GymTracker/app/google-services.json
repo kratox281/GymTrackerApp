@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "425959647974",
+    "project_id": "tfgrubencasas",
+    "storage_bucket": "tfgrubencasas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:425959647974:android:d8249e705bd9f9b4b6a927",
+        "android_client_info": {
+          "package_name": "com.example.gymtracker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhmntgQPDUD7DELnafy7Ywnagbr5Id470"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -4,24 +4,41 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.example.gymtracker.R;
 import com.example.gymtracker.apartadoajustes.Ajustes;
 import com.example.gymtracker.main.MainActivity;
 import com.example.gymtracker.record.Records;
 import com.example.gymtracker.rutinas.OpcionesRutinas;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import java.util.ArrayList;
+import java.util.Map;
+
+import resources.Rutina;
 
 public class ElegirEntrenamiento extends AppCompatActivity {
-
+    private ArrayAdapter<Rutina> ad ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_elegir_entrenamiento);
-        findViewById(R.id.bt_provisional).setOnClickListener(v -> {
-            startActivity(new Intent(getApplicationContext(),Entrenamiento.class));
-        });
+        ListView lv = findViewById(R.id.lv_rutinas_elegir_entrenamiento);
+        ArrayList<Rutina>rutinas = new ArrayList<>();
+        ad = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1,rutinas);
+        lv.setAdapter(ad);
+        llenar();
     }
     //COPIAR ESTO
     @Override
@@ -66,4 +83,29 @@ public class ElegirEntrenamiento extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     //HASTA AQUI
+
+    private void llenar(){
+        ArrayList<Rutina> rutinas = new ArrayList<>();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Rutinas")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Map<String,Integer> ejercicios = (Map<String, Integer>) document.get("ejercicios");
+                                Rutina r = new Rutina((String) document.get("nombre"), ejercicios);
+                                Log.e("RUTINA", r.toString() );
+                                Log.e("CONSULTA", "Referencia: "+document.getId()+" ejer"+document.get("ejercicio"));
+                                r.setReferencia(document.getId());
+                                ad.add(r);
+                                Log.d("EEOOOO",  document.getId() + " => " + document.getData());
+                            }
+                        } else {
+                            Log.w("BDD", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+    }
 }

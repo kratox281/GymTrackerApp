@@ -37,7 +37,7 @@ public class OpcionesRutinas extends AppCompatActivity {
                 }
         );
         modificar.setOnClickListener(v -> {
-                    Intent cambio = new Intent(getApplicationContext(),ModificarRutinas.class);
+                    Intent cambio = new Intent(getApplicationContext(),SeleccionarRutinaModificar.class);
                     startActivity(cambio);
 
                 }

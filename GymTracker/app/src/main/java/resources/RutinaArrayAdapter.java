@@ -14,8 +14,8 @@ import androidx.annotation.Nullable;
 import java.util.List;
 import java.util.Map;
 
-public class RutinaArrayAdapter extends ArrayAdapter<Rutina>{
-    public RutinaArrayAdapter(@NonNull Context context, int resource, @NonNull List<Rutina> objects) {
+public class RutinaArrayAdapter extends ArrayAdapter<Ejercicio>{
+    public RutinaArrayAdapter(@NonNull Context context, int resource, @NonNull List<Ejercicio> objects) {
         super(context, resource, objects);
     }
 
@@ -25,11 +25,9 @@ public class RutinaArrayAdapter extends ArrayAdapter<Rutina>{
 
         LayoutInflater constructor = LayoutInflater.from(getContext());
         View item = constructor.inflate(R.layout.listviewejercicios,null);
-        Rutina rutina = getItem(position);
-        Map<String,Integer> ejercicios = rutina.getEjercicios();
-        String[]claves = ejercicios.keySet().toArray(new String[ejercicios.size()]);
-        ((TextView)item.findViewById(R.id.tv_ejercicioRutina)).setText(claves[position]);
-        ((TextView)item.findViewById(R.id.tv_numeroSeries)).setText(ejercicios.get(claves[position]));
+        Ejercicio rutina = getItem(position);
+        ((TextView)item.findViewById(R.id.tv_ejercicioRutina)).setText(rutina.getNombre());
+        ((TextView)item.findViewById(R.id.tv_numeroSeries)).setText(rutina.getRepeticiones());
 
 
         return item;

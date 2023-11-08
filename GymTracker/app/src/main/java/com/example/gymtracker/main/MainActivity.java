@@ -19,10 +19,28 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.gymtracker.databinding.ActivityMainBinding;
 import com.example.gymtracker.apartadoajustes.Ajustes;
 import com.example.gymtracker.rutinas.*;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.*;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import resources.Rutina;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,7 +50,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Log.e("BDD","Inicializa");
+        FirebaseApp.initializeApp(this.getApplicationContext());
+        Log.e("BDD","Inicializa");
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -43,9 +63,29 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         me = findViewById(R.id.bt_me);
         me.setOnClickListener(view ->{
-            Intent test = new Intent(getApplicationContext(), AboutMe.class);
+            /*Intent test = new Intent(getApplicationContext(), AboutMe.class);
             startActivity(test);
             finish();
+            */
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            // Create a new user with a first and last name
+
+            db.collection("Records")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    Log.d("BDD", document.getId() + " => " + document.get("ejercicio"));
+                                }
+                            } else {
+                                Log.w("BDD", "Error getting documents.", task.getException());
+                            }
+                        }
+                    });
+
+            ;
         });
     }
 //COPIAR ESTO

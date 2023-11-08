@@ -5,12 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.*;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.gymtracker.R;
-import com.example.gymtracker.aboutme.AboutMe;
 import com.example.gymtracker.apartadoajustes.Ajustes;
 import com.example.gymtracker.entrenamiento.Entrenamiento;
 import com.example.gymtracker.main.MainActivity;
@@ -24,26 +24,22 @@ import com.google.firebase.firestore.QuerySnapshot;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
-import resources.Record;
 import resources.Rutina;
 
-public class Rutinas extends AppCompatActivity {
-    private  ArrayAdapter ad ;
+public class SeleccionarRutinaModificar extends AppCompatActivity {
+    ArrayAdapter ad;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rutinas);
-        ListView lv = findViewById(R.id.lvRutinasCompleta);
+        setContentView(R.layout.activity_seleccionar_rutina_modificar);
+        ListView lv = findViewById(R.id.lv_modificarRutina_seleccion);
         ArrayList<Rutina>rutinas = new ArrayList<>();
         ad = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1,rutinas);
         lv.setAdapter(ad);
         llenar();
     }
-
-
     //COPIAR ESTO
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -64,7 +60,7 @@ public class Rutinas extends AppCompatActivity {
                 finish();
                 break;
             case "Settings":
-                test = new Intent(getApplicationContext(),Ajustes.class);
+                test = new Intent(getApplicationContext(), Ajustes.class);
                 startActivity(test);
                 finish();
                 break;
@@ -110,5 +106,4 @@ public class Rutinas extends AppCompatActivity {
                     }
                 });
     }
-    //HASTA AQUI
 }

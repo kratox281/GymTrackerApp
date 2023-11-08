@@ -13,6 +13,13 @@
         android:theme="@style/Theme.GymTracker"
         tools:targetApi="31">
         <activity
+            android:name=".rutinas.SeleccionarRutinaModificar"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".rutinas.ModificarRutinas"
             android:exported="false">
             <meta-data
