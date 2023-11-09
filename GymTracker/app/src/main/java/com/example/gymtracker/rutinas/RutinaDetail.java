@@ -6,49 +6,45 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.gymtracker.R;
-import com.example.gymtracker.aboutme.AboutMe;
 import com.example.gymtracker.apartadoajustes.Ajustes;
 import com.example.gymtracker.entrenamiento.ElegirEntrenamiento;
 import com.example.gymtracker.entrenamiento.Entrenamiento;
+import com.example.gymtracker.main.MainActivity;
 import com.example.gymtracker.record.Records;
 
-public class OpcionesRutinas extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Set;
 
+import resources.Ejercicio;
+import resources.Rutina;
+import resources.RutinaArrayAdapter;
+
+public class RutinaDetail extends AppCompatActivity {
+    private RutinaArrayAdapter adr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_opciones_rutinas);
-        Button crear = findViewById(R.id.bt_crearRutina);
-        Button ver = findViewById(R.id.bt_verRutinas);
-        Button modificar = findViewById(R.id.bt_modificarRutina);
+        setContentView(R.layout.activity_rutina_detail);
+        Rutina rutina = (Rutina) getIntent().getSerializableExtra("rutina");
+        TextView tv = findViewById(R.id.tv_nombreDetail);
+        ListView lv = findViewById(R.id.lv_rutinaDetail);
+        ArrayList<Ejercicio> ejercicios = new ArrayList<>();
+        tv.setText(rutina.getNombre());
+        adr = new RutinaArrayAdapter(getApplicationContext(),R.layout.listviewejercicios,ejercicios);
+        lv.setAdapter(adr);
+        llenar(rutina);
 
-        crear.setOnClickListener(v -> {
-            Intent cambio = new Intent(getApplicationContext(),CrearRutinas.class);
-            startActivity(cambio);
-
-                }
-        );
-        ver.setOnClickListener(v -> {
-                    Intent cambio = new Intent(getApplicationContext(),Rutinas.class);
-                    startActivity(cambio);
-
-                }
-        );
-        modificar.setOnClickListener(v -> {
-                    Intent cambio = new Intent(getApplicationContext(),SeleccionarRutinaModificar.class);
-                    startActivity(cambio);
-
-                }
-        );
     }
     //COPIAR ESTO
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_rutinas, menu);
         return true;
     }
 
@@ -61,17 +57,17 @@ public class OpcionesRutinas extends AppCompatActivity {
             case "Records":
                 test= new Intent(getApplicationContext(), Records.class);
                 startActivity(test);
-                //finish();
+                finish();
                 break;
             case "Settings":
                 test = new Intent(getApplicationContext(), Ajustes.class);
                 startActivity(test);
-                //finish();
+                finish();
                 break;
             case "Entrenamiento":
                 test = new Intent(getApplicationContext(), ElegirEntrenamiento.class);
                 startActivity(test);
-                //finish();
+                finish();
                 break;
             case "Rutinas":
                 test = new Intent(getApplicationContext(), OpcionesRutinas.class);
@@ -79,12 +75,20 @@ public class OpcionesRutinas extends AppCompatActivity {
                 finish();
                 break;
             default:
-                test = new Intent(getApplicationContext(), AboutMe.class);
+                test = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(test);
-                //finish();
+                finish();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
-//HASTA AQUI
+
+    private void llenar(Rutina rutina){
+        Map<String,Integer>mapa = rutina.getEjercicios();
+        Set<String>ejers = mapa.keySet();
+        for (String s:ejers){
+            Ejercicio e = new Ejercicio(s,mapa.get(s)+"");
+            adr.add(e);
+        }
+    }
 }

@@ -2,14 +2,21 @@ package com.example.gymtracker.rutinas;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.gymtracker.R;
+import com.example.gymtracker.apartadoajustes.Ajustes;
+import com.example.gymtracker.entrenamiento.ElegirEntrenamiento;
+import com.example.gymtracker.main.MainActivity;
+import com.example.gymtracker.record.Records;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -72,5 +79,51 @@ public class CrearRutinas extends AppCompatActivity {
                     });
 
         });
+        lv.setOnItemClickListener((parent, view, position, id) -> {
+
+            adr.remove(adr.getItem(position));
+        });
+    }
+    //COPIAR ESTO
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_rutinas, menu);
+        return true;
+    }
+
+
+    //Redireccionar a la actividad necesaria desde el menú
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent test;
+        switch (item.getTitle().toString()){
+            case "Records":
+                test= new Intent(getApplicationContext(), Records.class);
+                startActivity(test);
+                finish();
+                break;
+            case "Settings":
+                test = new Intent(getApplicationContext(), Ajustes.class);
+                startActivity(test);
+                finish();
+                break;
+            case "Entrenamiento":
+                test = new Intent(getApplicationContext(), ElegirEntrenamiento.class);
+                startActivity(test);
+                finish();
+                break;
+            case "Rutinas":
+                test = new Intent(getApplicationContext(), OpcionesRutinas.class);
+                startActivity(test);
+                finish();
+                break;
+            default:
+                test = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(test);
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

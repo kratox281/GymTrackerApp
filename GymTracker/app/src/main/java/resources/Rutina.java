@@ -1,9 +1,10 @@
 package resources;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class Rutina {
+public class Rutina implements Serializable {
     private String nombre;
     private Map<String,Integer> ejercicios;
     private String usuario;

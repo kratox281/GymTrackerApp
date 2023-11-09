@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.*;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,26 +17,65 @@ import com.example.gymtracker.record.Records;
 import com.example.gymtracker.rutinas.OpcionesRutinas;
 import com.example.gymtracker.rutinas.Rutinas;
 
-public class Entrenamiento extends AppCompatActivity {
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Map;
 
+import resources.Rutina;
+
+public class Entrenamiento extends AppCompatActivity {
+    private int ejercicio =0;
+ private   String actual ="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entrenamiento);
+
+        //Obtener Rutina
+        Rutina rutina = (Rutina) getIntent().getSerializableExtra("rutina");
+        Log.e("ENTRENAMIENTO", rutina.toString()+rutina.getEjercicios() );
+       Map<String,Integer>ejercicios = rutina.getEjercicios();
+        ArrayList<String> lista = new ArrayList<>(ejercicios.keySet());
+        Object[]ejers =  lista.toArray();
+         actual= (String) ejers[ejercicio];
+        String siguiente = (String)ejers[ejercicio+1];
+        TextView ejerActual = findViewById(R.id.tv_ejercicioActual);
+        TextView siguienteEjercicio = findViewById(R.id.tv_siguienteEjercio);
+        ejerActual.setText(actual);
+        siguienteEjercicio.setText(siguiente);
+        //Cambiar entre ejercicios
+
         findViewById(R.id.bt_siguienteSerie).setOnClickListener(v -> {
             TextView contador =findViewById(R.id.tv_contadorRepes);
             contador.getText();
-            int serie = Integer.parseInt(contador.getText().toString());
+            long serie = Integer.parseInt(contador.getText().toString());
             serie++;
-            if (serie>=5){
+            long maxSeries = ejercicios.get(actual);
+            Log.e("compuruueva", maxSeries+"");
+          /*  if (serie<=maxSeries){
                     contador.setText("1");
+                    ejercicio++;
                 Toast.makeText(this, "Siguiente Ejercicio", Toast.LENGTH_SHORT).show();
+               // if((ejercicio)==ejers.length-1){
+                 //   actual = (String) ejers[ejercicio];
+                   // ejerActual.setText(actual);
+                    //siguienteEjercicio.setText("");
+                //}else if((ejercicio)==ejers.length){
+                   // ejercicio=0;
+                    //actual = (String) ejers[ejercicio];
+                    //ejerActual.setText(ejers[ejercicio].toString());
+                    //siguienteEjercicio.setText((String)ejers[ejercicio+1]);
+                //}else{
+                    //actual = (String) ejers[ejercicio];
+                    //ejerActual.setText(actual.toString());
+                   // siguienteEjercicio.setText((String)ejers[ejercicio+1]);
+             //   }
                 //Aqui vendria el codigo para realizar el cambio en los otros dos textviews
                 //Implementacion junto a BDD
             }else {
                 String nuevoTexto = ""+serie;
                 contador.setText(nuevoTexto);
-            }
+            }*/
         });
     }
 
@@ -65,7 +105,7 @@ public class Entrenamiento extends AppCompatActivity {
                 finish();
                 break;
             case "Entrenamiento":
-                test = new Intent(getApplicationContext(), Entrenamiento.class);
+                test = new Intent(getApplicationContext(), ElegirEntrenamiento.class);
                 startActivity(test);
                 finish();
                 break;

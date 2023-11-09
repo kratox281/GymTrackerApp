@@ -39,6 +39,14 @@ public class ElegirEntrenamiento extends AppCompatActivity {
         ad = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1,rutinas);
         lv.setAdapter(ad);
         llenar();
+        lv.setOnItemClickListener((parent, view, position, id) -> {
+            //Codigo importante
+            Rutina rutina = ad.getItem(position);
+            Intent test = new Intent(getApplicationContext(),Entrenamiento.class);
+            test.putExtra("rutina",rutina);
+            startActivity(test);
+            finish();
+        });
     }
     //COPIAR ESTO
     @Override
@@ -65,7 +73,7 @@ public class ElegirEntrenamiento extends AppCompatActivity {
                 finish();
                 break;
             case "Entrenamiento":
-                test = new Intent(getApplicationContext(), Entrenamiento.class);
+                test = new Intent(getApplicationContext(), ElegirEntrenamiento.class);
                 startActivity(test);
                 finish();
                 break;

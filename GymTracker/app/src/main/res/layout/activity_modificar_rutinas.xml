@@ -7,6 +7,7 @@
     tools:context=".rutinas.ModificarRutinas">
 
     <ListView
+        android:id="@+id/lv_rutina_modificar"
         android:layout_width="415dp"
         android:layout_height="324dp"
         app:layout_constraintBottom_toBottomOf="parent"

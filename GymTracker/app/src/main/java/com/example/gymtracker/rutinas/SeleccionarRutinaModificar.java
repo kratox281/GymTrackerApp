@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import com.example.gymtracker.R;
 import com.example.gymtracker.apartadoajustes.Ajustes;
+import com.example.gymtracker.entrenamiento.ElegirEntrenamiento;
 import com.example.gymtracker.entrenamiento.Entrenamiento;
 import com.example.gymtracker.main.MainActivity;
 import com.example.gymtracker.record.Records;
@@ -39,6 +40,14 @@ public class SeleccionarRutinaModificar extends AppCompatActivity {
         ad = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1,rutinas);
         lv.setAdapter(ad);
         llenar();
+        lv.setOnItemClickListener((parent, view, position, id) -> {
+            //Codigo importante
+            Rutina rutina = (Rutina) ad.getItem(position);
+            Intent test = new Intent(getApplicationContext(),ModificarRutinas.class);
+            test.putExtra("rutina",rutina);
+            startActivity(test);
+            finish();
+        });
     }
     //COPIAR ESTO
     @Override
@@ -65,7 +74,7 @@ public class SeleccionarRutinaModificar extends AppCompatActivity {
                 finish();
                 break;
             case "Entrenamiento":
-                test = new Intent(getApplicationContext(), Entrenamiento.class);
+                test = new Intent(getApplicationContext(), ElegirEntrenamiento.class);
                 startActivity(test);
                 finish();
                 break;

@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.example.gymtracker.aboutme.AboutMe;
 import com.example.gymtracker.databinding.ActivityAjustesBinding;
+import com.example.gymtracker.entrenamiento.ElegirEntrenamiento;
 import com.example.gymtracker.entrenamiento.Entrenamiento;
 import com.example.gymtracker.main.MainActivity;
 import com.example.gymtracker.record.Records;
@@ -116,7 +117,7 @@ public class Ajustes extends AppCompatActivity {
                 finish();
                 break;
             case "Entrenamiento":
-                test = new Intent(getApplicationContext(), Entrenamiento.class);
+                test = new Intent(getApplicationContext(), ElegirEntrenamiento.class);
                 actualizacionUsuario();
                 startActivity(test);
                 finish();

@@ -7,6 +7,7 @@ import com.example.gymtracker.R;
 import com.example.gymtracker.aboutme.AboutMe;
 import com.example.gymtracker.apartadoajustes.Ajustes;
 import com.example.gymtracker.databinding.ActivityRecordsBinding;
+import com.example.gymtracker.entrenamiento.ElegirEntrenamiento;
 import com.example.gymtracker.entrenamiento.Entrenamiento;
 import com.example.gymtracker.main.MainActivity;
 import com.example.gymtracker.rutinas.*;
@@ -134,7 +135,7 @@ public class Records extends AppCompatActivity {
                 finish();
                 break;
             case "Entrenamiento":
-                test = new Intent(getApplicationContext(), Entrenamiento.class);
+                test = new Intent(getApplicationContext(), ElegirEntrenamiento.class);
                 startActivity(test);
                 finish();
                 break;
@@ -180,7 +181,6 @@ public class Records extends AppCompatActivity {
 
     }
     private void llenar(){
-         ArrayList<Record>records = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Records")
                 .get()
