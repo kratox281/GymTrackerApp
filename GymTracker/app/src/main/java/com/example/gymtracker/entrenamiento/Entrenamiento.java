@@ -44,38 +44,36 @@ public class Entrenamiento extends AppCompatActivity {
         ejerActual.setText(actual);
         siguienteEjercicio.setText(siguiente);
         //Cambiar entre ejercicios
-
+        findViewById(R.id.bt_siguienteSerie).setEnabled(true);
         findViewById(R.id.bt_siguienteSerie).setOnClickListener(v -> {
             TextView contador =findViewById(R.id.tv_contadorRepes);
             contador.getText();
-            long serie = Integer.parseInt(contador.getText().toString());
+            Integer serie = Integer.parseInt(contador.getText().toString());
             serie++;
-            long maxSeries = ejercicios.get(actual);
-            Log.e("compuruueva", maxSeries+"");
-          /*  if (serie<=maxSeries){
+
+            if (serie>=5){
                     contador.setText("1");
                     ejercicio++;
                 Toast.makeText(this, "Siguiente Ejercicio", Toast.LENGTH_SHORT).show();
-               // if((ejercicio)==ejers.length-1){
-                 //   actual = (String) ejers[ejercicio];
-                   // ejerActual.setText(actual);
-                    //siguienteEjercicio.setText("");
-                //}else if((ejercicio)==ejers.length){
-                   // ejercicio=0;
-                    //actual = (String) ejers[ejercicio];
-                    //ejerActual.setText(ejers[ejercicio].toString());
-                    //siguienteEjercicio.setText((String)ejers[ejercicio+1]);
-                //}else{
-                    //actual = (String) ejers[ejercicio];
-                    //ejerActual.setText(actual.toString());
-                   // siguienteEjercicio.setText((String)ejers[ejercicio+1]);
-             //   }
-                //Aqui vendria el codigo para realizar el cambio en los otros dos textviews
-                //Implementacion junto a BDD
+                if((ejercicio)==ejers.length-1){
+                    actual = (String) ejers[ejercicio];
+                    ejerActual.setText(actual);
+                    siguienteEjercicio.setText("");
+                }else if((ejercicio)==ejers.length){
+                    ejercicio=0;
+                    actual = (String) ejers[ejercicio];
+                    ejerActual.setText("Se acabo el entrenamiento");
+                    siguienteEjercicio.setText("");
+                    findViewById(R.id.bt_siguienteSerie).setEnabled(false);
+                }else{
+                    actual = (String) ejers[ejercicio];
+                    ejerActual.setText(actual.toString());
+                    siguienteEjercicio.setText((String)ejers[ejercicio+1]);
+               }
             }else {
                 String nuevoTexto = ""+serie;
                 contador.setText(nuevoTexto);
-            }*/
+            }
         });
     }
 

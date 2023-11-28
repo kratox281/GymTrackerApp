@@ -17,10 +17,8 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textAlignment="center"
-            tools:src="@tools:sample/avatars" />
+            android:layout_height="202dp"
+            android:src="@mipmap/ic_launcher_round" />
     </LinearLayout>
 
     <LinearLayout

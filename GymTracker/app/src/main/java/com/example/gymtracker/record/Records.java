@@ -58,7 +58,7 @@ public class Records extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
-
+        setTitle("");
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_records);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);

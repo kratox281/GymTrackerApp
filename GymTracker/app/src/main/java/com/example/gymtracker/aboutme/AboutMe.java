@@ -21,6 +21,7 @@ public class AboutMe extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_me);
         volverMe = findViewById(R.id.btVolverMe);
+        setTitle("");
         volverMe.setOnClickListener(view -> {
             Intent test = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(test);

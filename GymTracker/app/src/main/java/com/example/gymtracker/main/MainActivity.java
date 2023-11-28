@@ -57,35 +57,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
-
+        setTitle("");
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         me = findViewById(R.id.bt_me);
         me.setOnClickListener(view ->{
-            /*Intent test = new Intent(getApplicationContext(), AboutMe.class);
+            Intent test = new Intent(getApplicationContext(), AboutMe.class);
             startActivity(test);
             finish();
-            */
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            // Create a new user with a first and last name
 
-            db.collection("Records")
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    Log.d("BDD", document.getId() + " => " + document.get("ejercicio"));
-                                }
-                            } else {
-                                Log.w("BDD", "Error getting documents.", task.getException());
-                            }
-                        }
-                    });
 
-            ;
         });
     }
 //COPIAR ESTO
