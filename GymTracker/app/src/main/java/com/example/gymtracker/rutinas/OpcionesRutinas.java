@@ -48,7 +48,7 @@ public class OpcionesRutinas extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_rutinas, menu);
         return true;
     }
 
@@ -63,8 +63,8 @@ public class OpcionesRutinas extends AppCompatActivity {
                 startActivity(test);
                 //finish();
                 break;
-            case "Settings":
-                test = new Intent(getApplicationContext(), Ajustes.class);
+            case "Ajustes":
+                test = new Intent(getApplicationContext(),Ajustes.class);
                 startActivity(test);
                 //finish();
                 break;

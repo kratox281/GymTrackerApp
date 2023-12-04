@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#575555"
     tools:context=".rutinas.CrearRutinas">
 
     <EditText
@@ -13,6 +14,8 @@
         android:ems="10"
         android:hint="Nombre Rutina"
         android:inputType="textPersonName"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.169"
@@ -37,6 +40,8 @@
         android:ems="10"
         android:hint="Nombre Ejercicio"
         android:inputType="textPersonName"
+        android:textColor="#F8F8F8"
+        android:textColorHint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.079"
@@ -51,6 +56,8 @@
         android:ems="10"
         android:hint="Series"
         android:inputType="number"
+        android:textColor="#FDFCFC"
+        android:textColorHint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.901"

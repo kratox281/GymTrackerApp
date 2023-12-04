@@ -129,10 +129,10 @@ public class Records extends AppCompatActivity {
                 startActivity(test);
                 finish();
                 break;
-            case "Settings":
+            case "Ajustes":
                 test = new Intent(getApplicationContext(),Ajustes.class);
                 startActivity(test);
-                finish();
+                //finish();
                 break;
             case "Entrenamiento":
                 test = new Intent(getApplicationContext(), ElegirEntrenamiento.class);

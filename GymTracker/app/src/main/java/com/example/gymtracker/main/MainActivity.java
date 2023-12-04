@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(test);
                 //finish();
                 break;
-            case "Settings":
+            case "Ajustes":
                 test = new Intent(getApplicationContext(),Ajustes.class);
                 startActivity(test);
                 //finish();

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#575555"
     android:orientation="vertical"
     tools:context=".aboutme.AboutMe">
 
@@ -20,12 +21,19 @@
         android:layout_weight="0.7"
         android:text="Este es mi proyecto de fin de grado cómo estudiante de DAM en el Gregorio Fernandez"
         android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFEFE" />
 
     <Button
         android:id="@+id/btVolverMe"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
-        android:text="Volver" />
+        android:background="#D34848"
+        android:backgroundTint="#CA1E1E"
+        android:backgroundTintMode="src_atop"
+        android:foregroundTint="#AC1A1A"
+        android:text="Volver"
+        app:iconTint="#911C1C"
+        app:strokeColor="#7A5656" />
 </LinearLayout>

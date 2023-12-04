@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#575555"
     android:orientation="vertical"
     tools:context=".apartadoajustes.FragmentoAjustes">
 
@@ -13,7 +14,8 @@
         android:layout_height="wrap_content"
         android:text="Ajustes"
         android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textColor="#EDEDED" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +28,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.4"
             android:text="Nombre:"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="#FDFBFB" />
 
         <EditText
             android:id="@+id/etNombreAjustes"
@@ -35,7 +38,7 @@
             android:layout_weight="0.9"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Name" />
+            android:textColor="#F3EFEF" />
     </LinearLayout>
 
     <LinearLayout
@@ -49,7 +52,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.4"
             android:text="Repeticiones"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="#FFFFFF" />
 
         <EditText
             android:id="@+id/etRepeticionesAjustes"
@@ -57,7 +61,8 @@
             android:layout_height="50dp"
             android:layout_weight="0.9"
             android:ems="10"
-            android:inputType="number" />
+            android:inputType="number"
+            android:textColor="#FFFEFE" />
     </LinearLayout>
 
     <Button

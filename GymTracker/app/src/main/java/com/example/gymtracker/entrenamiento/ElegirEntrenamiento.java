@@ -67,10 +67,10 @@ public class ElegirEntrenamiento extends AppCompatActivity {
                 startActivity(test);
                 finish();
                 break;
-            case "Settings":
-                test = new Intent(getApplicationContext(), Ajustes.class);
+            case "Ajustes":
+                test = new Intent(getApplicationContext(),Ajustes.class);
                 startActivity(test);
-                finish();
+                //finish();
                 break;
             case "Entrenamiento":
                 test = new Intent(getApplicationContext(), ElegirEntrenamiento.class);

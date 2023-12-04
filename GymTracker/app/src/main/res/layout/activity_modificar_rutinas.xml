@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#575555"
     tools:context=".rutinas.ModificarRutinas">
 
     <ListView
@@ -24,6 +25,8 @@
         android:ems="10"
         android:hint="Ejercicio"
         android:inputType="textPersonName"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.079"
@@ -38,6 +41,8 @@
         android:ems="10"
         android:hint="Series"
         android:inputType="number"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.877"
@@ -73,6 +78,7 @@
         android:layout_width="169dp"
         android:layout_height="43dp"
         android:text="NombreRutina"
+        android:textColor="#FFFFFF"
         tools:layout_editor_absoluteX="65dp"
         tools:layout_editor_absoluteY="33dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

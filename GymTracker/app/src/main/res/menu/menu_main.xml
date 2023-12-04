@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.gymtracker.main.MainActivity">
     <item android:title="Records" />
-    <item android:title="Settings" />
+    <item android:title="Ajustes" />
     <item android:title="Entrenamiento" />
     <item android:title="Rutinas" />
 </menu>

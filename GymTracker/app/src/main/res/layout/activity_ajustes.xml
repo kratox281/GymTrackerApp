@@ -4,24 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#575555"
     tools:context=".apartadoajustes.Ajustes">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:foregroundTint="@color/purple_500"
+        android:foregroundTint="#D30E15"
         android:theme="@style/Theme.GymTracker.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/purple_500"
-            android:foregroundTint="@color/purple_500"
+            android:background="#D30E15"
+            android:foregroundTint="#D30E15"
             app:popupTheme="@style/Theme.GymTracker.PopupOverlay"
             app:title="Ajustes"
-            app:titleTextColor="@color/purple_500" />
+            app:titleTextColor="#D30E15" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
